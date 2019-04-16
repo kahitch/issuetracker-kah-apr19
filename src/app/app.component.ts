@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ApplicationStarted } from './actions/app.actions';
+import { State } from './reducers';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'issuetracker';
+
+  constructor(store: Store<State>) {
+    store.dispatch(new ApplicationStarted());
+  }
 }

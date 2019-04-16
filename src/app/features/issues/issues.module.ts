@@ -10,13 +10,18 @@ import { DeveloperListComponent } from './components/developer-list/developer-li
 import { StoreModule } from '@ngrx/store';
 import { featureName, reducers } from './reducers';
 import { DeveloperListSorterComponent } from './components/developer-list-sorter/developer-list-sorter.component';
-
+import { EffectsModule } from '@ngrx/effects';
+import { AppStartUpEffects } from './effects/app-startup.effects';
+import { HttpClientModule } from '@angular/common/http';
+import { DeveloperEffects } from './effects/developers.effects';
 @NgModule({
   declarations: [IssuesComponent, DevelopersComponent, OverviewComponent, DeveloperEntryComponent, DeveloperListComponent, DeveloperListSorterComponent],
   imports: [
     CommonModule,
     IssuesRoutingModule,
-    StoreModule.forFeature(featureName, reducers)
+    StoreModule.forFeature(featureName, reducers),
+    EffectsModule.forFeature([AppStartUpEffects, DeveloperEffects]),
+    HttpClientModule
   ]
 })
 export class IssuesModule { }
