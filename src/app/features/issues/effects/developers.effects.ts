@@ -5,12 +5,26 @@ import * as appActions from '../../../actions/app.actions';
 import * as developerActions from '../actions/developer.actions';
 import { HttpClient } from '@angular/common/http';
 import { DeveloperEntity } from '../reducers/developers.reducer';
-import { switchMap, map } from 'rxjs/operators';
-
+import { switchMap, map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable()
 export class DeveloperEffects {
   readonly uri = 'http://localhost:3000/developers';
+
+  @Effect() addDeveloper$ = this.action$
+    .pipe(
+      ofType(developerActions.ADDED_DEVELOPER),
+      map(a => a as developerActions.AddedDeveloper),
+      switchMap(originalAction => this.http.post<DeveloperEntity>(this.uri, originalAction.payload)
+        .pipe(
+          map(developerFromServer => new developerActions.SuccessfullyAddedADeveloper(originalAction.payload.id, developerFromServer)),
+          catchError(r =>
+            of(new developerActions.FailedAddingDeveloper('Cannot Add That Developer', originalAction.payload))
+          )
+        )
+      )
+    );
 
   @Effect() loadDevelopers$ = this.action$
     .pipe(

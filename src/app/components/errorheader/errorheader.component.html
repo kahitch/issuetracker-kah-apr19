@@ -1,0 +1,6 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger"
+     *ngIf="(hasError$ | async)">
+  <div class="navbar-brand">
+    {{ errorMessage$ | async }}
+  </div>
+</nav>

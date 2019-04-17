@@ -1,18 +1,24 @@
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as appActions from '../../../actions/app.actions';
-import { concatMap } from 'rxjs/operators';
-import { LoadDevelopers } from '../actions/developer.actions';
+import * as developerActions from '../actions/developer.actions';
+import { concatMap, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AppStartUpEffects {
 
+  @Effect() addingADeveloperDoneBlewedUp$ = this.action$
+    .pipe(
+      ofType(developerActions.ADDED_DEVELOPER_FAILURE),
+      map(a => a as developerActions.FailedAddingDeveloper),
+      map(a => new appActions.ApplicationError(a.errorMessage, 'issues'))
+    );
 
   @Effect() startup$ = this.action$
     .pipe(
       ofType(appActions.APP_START),
       concatMap(() => [
-        new LoadDevelopers()
+        new developerActions.LoadDevelopers()
       ])
     );
   constructor(private action$: Actions) { }

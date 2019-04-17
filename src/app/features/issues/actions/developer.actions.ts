@@ -28,5 +28,23 @@ export class AddedDeveloper implements Action {
   }
 }
 
+export const ADDED_DEVELOPER_SUCCESS = '[issues] added developer successfully';
+export class SuccessfullyAddedADeveloper implements Action {
+  readonly type = ADDED_DEVELOPER_SUCCESS;
+  constructor(public oldId: string, public developer: DeveloperEntity) { }
+}
 
-export type DeveloperActions = LoadDevelopers | LoadedDevelopersSuccessfully | AddedDeveloper;
+export const ADDED_DEVELOPER_FAILURE = '[issues] added developer failure';
+export class FailedAddingDeveloper implements Action {
+  readonly type = ADDED_DEVELOPER_FAILURE;
+  constructor(public errorMessage: string, public developer: DeveloperEntity) { }
+}
+
+
+
+export type DeveloperActions =
+  LoadDevelopers
+  | LoadedDevelopersSuccessfully
+  | AddedDeveloper
+  | SuccessfullyAddedADeveloper
+  | FailedAddingDeveloper;
