@@ -1,3 +1,16 @@
-<p>
-  overview works!
-</p>
+<div class="row"
+     *ngIf="(defectsLoaded$ | async) === true">
+  <div class="col-4">
+    <app-defect-entry></app-defect-entry>
+  </div>
+  <div class="col-8">
+    <app-defect-list [defects]="defects$ | async"></app-defect-list>
+  </div>
+</div>
+<div class="alert alert-danger"
+     *ngIf="(defectsLoaded$ | async) === false">
+  <h1>The Defects are getting loaded. Be with you soon.</h1>
+  <img src="https://data.whicdn.com/images/217175594/original.gif"
+       height="300px"
+       width="300px">
+</div>

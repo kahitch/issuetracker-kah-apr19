@@ -1,9 +1,11 @@
 import * as fromDevelopers from './developers.reducer';
 import * as fromSorters from './sorters.reducer';
 import * as fromUiHints from './ui-hints.reducer';
+import * as fromDefects from './defects.reducer';
 
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 import { DeveloperListItem } from '../models';
+import { DefectListItem } from '../models/defects';
 export const featureName = 'issuesFeature';
 
 export interface State {
@@ -30,8 +32,8 @@ export const _selectDevelopersBranch = createSelector(_selectIssuesFeature, b =>
 export const _selectSortersBranch = createSelector(_selectIssuesFeature, b => b.sorters);
 export const _selectUiHintsBranch = createSelector(_selectIssuesFeature, d => d.uiHints);
 // 3 Any Helpers you might need.
-export const { selectAll: _selectDefectEntities } = fromDevelopers.adapter.getSelectors(_selectDevelopersBranch);
-export const _selectDefectListItemsUnsorted = createSelector(_selectDefectEntities, devs => devs as DeveloperListItem[]);
+export const { selectAll: _selectDefectEntities } = fromDefects.adapter.getSelectors(_selectDefectsBranch);
+export const _selectDefectListItemsUnsorted = createSelector(_selectDefectEntities, defects => defects as DefectListItem[]);
 export const { selectAll: _selectDeveloperEntities } = fromDevelopers.adapter.getSelectors(_selectDevelopersBranch);
 export const _selectDeveloperListItemsUnsorted = createSelector(_selectDeveloperEntities, devs => devs as DeveloperListItem[]);
 
@@ -54,3 +56,5 @@ export const selectDeveloperListItems = createSelector(_selectDeveloperListItems
       return 0;
     })];
   });
+
+export const selectDefectListItems = createSelector(_selectDefectListItemsUnsorted, defects => defects as DefectListItem[]);

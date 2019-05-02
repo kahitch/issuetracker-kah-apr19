@@ -1,0 +1,12 @@
+h2.unassigned
+{
+  color: red;
+}
+h2.assigned
+{
+color: black;
+}
+h2.completed
+{
+  color: green;
+}

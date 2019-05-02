@@ -15,13 +15,16 @@ import { AppStartUpEffects } from './effects/app-startup.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { DeveloperEffects } from './effects/developers.effects';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DefectEntryComponent } from './components/defect-entry/defect-entry.component';
+import { DefectListComponent } from './components/defect-list/defect-list.component';
+import { DefectEffects } from './effects/defects.effects';
 @NgModule({
-  declarations: [IssuesComponent, DevelopersComponent, OverviewComponent, DeveloperEntryComponent, DeveloperListComponent, DeveloperListSorterComponent],
+  declarations: [IssuesComponent, DevelopersComponent, OverviewComponent, DeveloperEntryComponent, DeveloperListComponent, DeveloperListSorterComponent, DefectEntryComponent, DefectListComponent],
   imports: [
     CommonModule,
     IssuesRoutingModule,
     StoreModule.forFeature(featureName, reducers),
-    EffectsModule.forFeature([AppStartUpEffects, DeveloperEffects]),
+    EffectsModule.forFeature([AppStartUpEffects, DeveloperEffects, DefectEffects]),
     HttpClientModule,
     ReactiveFormsModule
   ]
