@@ -1,12 +1,15 @@
 import { Action } from '@ngrx/store';
+import * as fromDefectActions from '../actions/defect.actions';
 import * as fromDeveloperActions from '../actions/developer.actions';
 
 
 export interface State {
+  defectsLoaded: boolean;
   developersLoaded: boolean;
 }
 
 const initialState: State = {
+  defectsLoaded: false,
   developersLoaded: false
 };
 

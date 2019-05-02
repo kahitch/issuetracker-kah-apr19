@@ -1,17 +1,17 @@
 // import { Action } from '@ngrx/store';
 import * as actions from '../actions/defect.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { DeveloperListItem } from '../models';
+import { DefectListItem as DefectEntity } from './../models/defects';
 
-export interface DefectEntity {
-  id: string;
-  title: string;
-  dateSubmitted: string;
-  description: string;
-  assignedTo: DeveloperListItem;
-  dateFixed: string;
-  commitHashOfFix: string;
-}
+// export interface DefectEntity {
+//   id: string;
+//   title: string;
+//   dateSubmitted: string;
+//   description: string;
+//   assignedTo: DeveloperListItem;
+//   dateFixed: string;
+//   commitHashOfFix: string;
+// }
 
 export interface State extends EntityState<DefectEntity> {
 
