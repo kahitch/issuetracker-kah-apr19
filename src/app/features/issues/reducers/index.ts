@@ -57,4 +57,13 @@ export const selectDeveloperListItems = createSelector(_selectDeveloperListItems
     })];
   });
 
-export const selectDefectListItems = createSelector(_selectDefectListItemsUnsorted, defects => defects as DefectListItem[]);
+export const selectUnassignedDefectListItems = createSelector(
+  _selectDefectListItemsUnsorted,
+  (defects: DefectListItem[]) => defects.filter(defect => defect.assignedTo.length === 0));
+export const selectAssignedDefectListItems = createSelector(
+  _selectDefectListItemsUnsorted,
+  (defects: DefectListItem[]) => defects.filter(defect => defect.assignedTo.length > 0 && defect.dateFixed.length === 0));
+export const selectCompletedDefectListItems = createSelector(
+  _selectDefectListItemsUnsorted,
+  (defects: DefectListItem[]) => defects.filter(defect => defect.dateFixed.length > 0));
+

@@ -18,13 +18,13 @@ export const ADDED_DEFECT = '[issues] defect added';
 export class AddedDefect implements Action {
   readonly type = ADDED_DEFECT;
   public payload: DefectEntity;
-  constructor(title: string, description: string) {
+  constructor(title: string, description: string, assignedTo: string) {
     this.payload = {
       id: 'T' + (++currentId),
       title,
-      dateSubmitted: '',
+      dateSubmitted: new Date().toISOString(),
       description,
-      assignedTo: null,
+      assignedTo,
       dateFixed: '',
       commitHashOfFix: ''
     };

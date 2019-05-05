@@ -8,18 +8,13 @@ import { DefectListItem } from '../../models/defects';
 })
 export class DefectListComponent implements OnInit {
 
-  @Input() defects: DefectListItem[];
-
-  unassignedDefects: DefectListItem[];
-  assignedDefects: DefectListItem[];
-  completedDefects: DefectListItem[];
+  @Input() unassignedDefects: DefectListItem[];
+  @Input() assignedDefects: DefectListItem[];
+  @Input() completedDefects: DefectListItem[];
 
   constructor() { }
 
   ngOnInit() {
-    this.unassignedDefects = this.defects.filter(e => e.assignedTo.length === 0);
-    this.assignedDefects = this.defects.filter(e => e.assignedTo.length > 0 && e.dateFixed.length === 0);
-    this.completedDefects = this.defects.filter(e => e.dateFixed.length > 0);
   }
 
 }
