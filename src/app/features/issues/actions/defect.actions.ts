@@ -44,9 +44,42 @@ export class FailedAddingDefect implements Action {
 }
 
 
+export const UPDATED_DEFECT = '[issues] defect updated';
+export class UpdatedDefect implements Action {
+  readonly type = UPDATED_DEFECT;
+  public payload: DefectEntity;
+  constructor(id: string, title: string, dateSubmitted: string, description: string, assignedTo: string) {
+    this.payload = {
+      id,
+      title,
+      dateSubmitted,
+      description,
+      assignedTo,
+      dateFixed: '',
+      commitHashOfFix: ''
+    };
+  }
+}
+
+export const UPDATED_DEFECT_SUCCESS = '[issues] updated defect successfully';
+export class SuccessfullyUpdatedDefect implements Action {
+  readonly type = UPDATED_DEFECT_SUCCESS;
+  constructor(public oldId: string, public defect: DefectEntity) { }
+}
+
+export const UPDATED_DEFECT_FAILURE = '[issues] updated defect failure';
+export class FailedUpdatingDefect implements Action {
+  readonly type = UPDATED_DEFECT_FAILURE;
+  constructor(public errorMessage: string, public defect: DefectEntity) { }
+}
+
+
 export type DefectActions =
   LoadDefects
   | LoadedDefectsSuccessfully
   | AddedDefect
   | SuccessfullyAddedADefect
-  | FailedAddingDefect;
+  | FailedAddingDefect
+  | UpdatedDefect
+  | SuccessfullyUpdatedDefect
+  | FailedUpdatingDefect;
