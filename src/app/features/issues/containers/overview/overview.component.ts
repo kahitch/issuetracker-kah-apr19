@@ -37,6 +37,10 @@ export class OverviewComponent implements OnInit {
     this.devs$ = this.store.select(selectDeveloperListItems);
     this.developersLoaded$ = this.store.select(selectDevelopersLoaded);
   }
+
+  public loadDefectForEdit(id: string) {
+    this.
+  };
 }
 
 

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { DefectListItem as DefectEntity } from '../models/defects';
+import { DefectEntity } from '../reducers/defects.reducer';
 
 export const LOAD_DEFECTS = '[issues] load the defects';
 export class LoadDefects implements Action {
