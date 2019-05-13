@@ -35,6 +35,9 @@ export function reducer(state: State = initialState, action: actions.DefectActio
     case actions.LOAD_DEFECTS_SUCCESS: {
       return adapter.addAll(action.payload, state);
     }
+    case actions.UPDATED_DEFECT: {
+      return adapter.updateOne(action.payload, state);
+    }
     default: {
       return state;
     }

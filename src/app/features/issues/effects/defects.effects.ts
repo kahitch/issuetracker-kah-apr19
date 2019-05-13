@@ -18,7 +18,7 @@ export class DefectEffects {
       map(a => a as defectActions.AddedDefect),
       switchMap(originalAction => this.http.post<DefectEntity>(this.uri, originalAction.payload)
         .pipe(
-          map(developerFromServer => new defectActions.SuccessfullyAddedADefect(originalAction.payload.id, developerFromServer)),
+          map(defectFromServer => new defectActions.SuccessfullyAddedADefect(originalAction.payload.id, defectFromServer)),
           catchError(r =>
             of(new defectActions.FailedAddingDefect('Cannot Add That Defect', originalAction.payload))
           )
@@ -37,8 +37,20 @@ export class DefectEffects {
       )
     );
 
-  // TODO: Add this to the environment
 
+  @Effect() updateDefect$ = this.action$
+    .pipe(
+      ofType(defectActions.UPDATED_DEFECT),
+      map(a => a as defectActions.UpdatedDefect),
+      switchMap(originalAction => this.http.put<DefectEntity>(this.uri, originalAction.payload)
+        .pipe(
+          map(defectFromServer => new defectActions.SuccessfullyUpdatedDefect(originalAction.payload.id, defectFromServer)),
+          catchError(r =>
+            of(new defectActions.FailedUpdatingDefect('Cannot Update That Defect', originalAction.payload))
+          )
+        )
+      )
+    );
 
   constructor(private action$: Actions, private http: HttpClient) {
 

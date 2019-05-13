@@ -1,6 +1,12 @@
 import { Action } from '@ngrx/store';
 import { DefectEntity } from '../reducers/defects.reducer';
 
+export const LOAD_DEFECT = '[issues] load a defect for edit';
+export class LoadDefect implements Action {
+  readonly type = LOAD_DEFECT;
+  constructor(public defect: DefectEntity) { }
+}
+
 export const LOAD_DEFECTS = '[issues] load the defects';
 export class LoadDefects implements Action {
   readonly type = LOAD_DEFECTS;
@@ -48,23 +54,15 @@ export const UPDATED_DEFECT = '[issues] defect updated';
 export class UpdatedDefect implements Action {
   readonly type = UPDATED_DEFECT;
   public payload: DefectEntity;
-  constructor(id: string, title: string, dateSubmitted: string, description: string, assignedTo: string) {
-    this.payload = {
-      id,
-      title,
-      dateSubmitted,
-      description,
-      assignedTo,
-      dateFixed: '',
-      commitHashOfFix: ''
-    };
+  constructor(defect: DefectEntity) {
+    this.payload = defect;
   }
 }
 
 export const UPDATED_DEFECT_SUCCESS = '[issues] updated defect successfully';
 export class SuccessfullyUpdatedDefect implements Action {
   readonly type = UPDATED_DEFECT_SUCCESS;
-  constructor(public oldId: string, public defect: DefectEntity) { }
+  constructor(public id: string, public defect: DefectEntity) { }
 }
 
 export const UPDATED_DEFECT_FAILURE = '[issues] updated defect failure';

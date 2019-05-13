@@ -4,13 +4,13 @@
       <h2 class="unassigned">Unassigned</h2>
       <div class="card border-danger" *ngFor="let defect of unassignedDefects">
         <div class="card-body">
-          <h5 class="card-title">{{ defect.title }}</h5>
+          <h5 class="card-title">{{defect.id}}: {{ defect.title }}</h5>
           <h6 class="card-subtitle mb-2">Opened {{ defect.dateSubmitted | date:"MM/dd/yyyy" }}</h6>
           <h6 class="card-subtitle mb-2 text-muted">UNASSIGNED</h6>
           <p class="card-text">
             {{ defect.description }}
           </p>
-          <a href="#" class="card-link">Edit</a>
+          <a class="card-link">Edit</a>
           <a href="#" class="card-link">Assign</a>
         </div>
       </div>
@@ -19,14 +19,14 @@
       <h2 class="assigned">Assigned</h2>
       <div class="card" *ngFor="let defect of assignedDefects">
         <div class="card-body">
-          <h5 class="card-title">{{ defect.title }}</h5>
+          <h5 class="card-title">{{defect.id}}: {{ defect.title }}</h5>
           <h6 class="card-subtitle mb-2">Opened {{ defect.dateSubmitted | date:"MM/dd/yyyy" }}</h6>
           <h6 class="card-subtitle mb-2 text-muted">Assigned to {{ defect.assignedTo }}</h6>
           <p class="card-text">
             {{ defect.description }}
           </p>
-          <a href="#" class="card-link">Edit</a>
-          <a href="#" class="card-link">UN-Assign</a>
+          <a class="card-link">Edit</a>
+          <a (click)="unassignDefect(defect)" class="card-link">UN-Assign</a>
           <a href="#" class="card-link">Resolve</a>
         </div>
       </div>
@@ -35,7 +35,7 @@
       <h2 class="completed">Completed</h2>
       <div class="card border-success" *ngFor="let defect of completedDefects">
         <div class="card-body">
-          <h5 class="card-title">{{ defect.title }}</h5>
+          <h5 class="card-title">{{defect.id}}: {{ defect.title }}</h5>
           <h6 class="card-subtitle mb-2">Opened {{ defect.dateSubmitted | date:"MM/dd/yyyy" }}</h6>
           <h6 class="card-subtitle mb-2 text-muted">Assigned to {{ defect.assignedTo }}</h6>
           <p class="card-text">
